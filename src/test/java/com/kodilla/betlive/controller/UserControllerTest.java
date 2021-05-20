@@ -40,42 +40,54 @@ class UserControllerTest {
 
     @Test
     void checkBalance() {
+        //Given
+        User user = new User();
+        user.setUserName("username");
+        user.setBalance(new BigDecimal(250.0));
+        userDbService.saveUser(user);
 
         //When
         BigDecimal result = userController.checkBalance(1);
 
         //Then
-        assertEquals(new BigDecimal(350.0), result);
+        assertEquals(new BigDecimal(250.0), result);
 
-
+        userDao.deleteAll();
     }
 
     @Test
     void makeDeposit() {
+        //Given
+        User user = new User();
+        user.setUserName("username");
+        user.setBalance(new BigDecimal(250.0));
+        userDbService.saveUser(user);
 
         //When
         userController.makeDeposit(1, new BigDecimal(50.0));
         BigDecimal result = userController.checkBalance(1);
 
         //Then
-        assertEquals(new BigDecimal(350.0), result);
+        assertEquals(new BigDecimal(300.0), result);
 
     }
 
     @Test
     void withdrawMoney() {
         //Given
-       User user = new User();
-       user.setUserName("username");
-       user.setBalance(new BigDecimal(250.0));
-       userDbService.saveUser(user);
+        User user = new User();
+        user.setUserName("username");
+        user.setBalance(new BigDecimal(250.0));
+        userDbService.saveUser(user);
 
         //When
         userController.withdrawMoney(1, new BigDecimal(50.0));
         BigDecimal result = userController.checkBalance(1);
 
         //Then
-        assertEquals(new BigDecimal(300.0), result);
+        assertEquals(new BigDecimal(200.0), result);
+
+        userDao.deleteAll();
 
 
     }
