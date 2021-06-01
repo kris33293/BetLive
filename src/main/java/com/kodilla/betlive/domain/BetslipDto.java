@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -15,7 +16,7 @@ import java.util.List;
 public class BetslipDto {
 
     int betslipId;
-    List<Bet> bets;
+    Set<Type> types;
     User user;
     BigDecimal totalOdds, totalStake, toWin;
     Ticket ticket;

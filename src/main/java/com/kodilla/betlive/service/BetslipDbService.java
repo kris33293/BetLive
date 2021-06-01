@@ -2,17 +2,21 @@ package com.kodilla.betlive.service;
 
 import com.kodilla.betlive.domain.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class BetslipDbService {
 
+    @Autowired
     private final BetslipDao betslipDao;
+    @Autowired
     private final TicketDao ticketDao;
-    private final TicketStatusDao ticketStatusDao;
+
 
     public Betslip createBetslip(Betslip betslip) {
         return betslipDao.save(betslip);
@@ -22,31 +26,40 @@ public class BetslipDbService {
         return betslipDao.findBetslipByBetslipId(betslipId);
     }
 
-    public List<Bet> findAllBets(int betslipId) {
+    public Set<Type> findAllTypes(int betslipId) {
         Betslip betslip = betslipDao.findBetslipByBetslipId(betslipId);
-        return betslip.getBets();
+        return betslip.getTypes();
     }
 
-    public void addBet(int betslipId, Bet bet) {
+    public void addType(int betslipId, Type type) {
         Betslip betslip = betslipDao.findBetslipByBetslipId(betslipId);
-        List<Bet> bets = betslip.getBets();
-        bets.add(bet);
-        betslip.setBets(bets);
+        Set<Type> types = betslip.getTypes();
+        types.add(type);
+        betslip.setTypes(types);
         betslipDao.save(betslip);
     }
 
-    public void deleteBet(int betslipId, Bet bet) {
+    public void deleteType(int betslipId, Type type) {
         Betslip betslip = betslipDao.findBetslipByBetslipId(betslipId);
-        List<Bet> bets = betslip.getBets();
-        bets.remove(bet);
-        betslip.setBets(bets);
+        Set<Type> types = betslip.getTypes();
+        types.remove(type);
+        betslip.setTypes(types);
         betslipDao.save(betslip);
+    }
+
+    public void deleteBetslip(int betslipId) {
+        betslipDao.deleteById(betslipId);
     }
 
     public Ticket createTicket(Betslip betslip) {
-        TicketStatus ticketStatus = ticketStatusDao.findTicketStatusByTicketStatusId(0);
-        Ticket ticket = new Ticket(betslip.getBetslipId(), betslip.getBets(), betslip.getUser(), betslip.getTotalOdds(), betslip.getTotalStake(), betslip.getToWin(),
-               ticketStatus, betslip.getTicket().getBetslip());
+        Ticket ticket = new Ticket();
+        ticket.setTypes(betslip.getTypes());
+        ticket.setUser(betslip.getUser());
+        ticket.setTotalStake(betslip.getTotalStake());
+        ticket.setToWin(betslip.getToWin());
+        ticket.setTotalOdds(betslip.getTotalOdds());
+        ticket.setBetslip(betslip);
+        ticket.setTicketStatus("pending");
         return ticketDao.save(ticket);
     }
 

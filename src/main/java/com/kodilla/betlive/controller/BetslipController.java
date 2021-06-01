@@ -2,19 +2,17 @@ package com.kodilla.betlive.controller;
 
 
 import com.kodilla.betlive.domain.*;
-import com.kodilla.betlive.mapper.BetMapper;
+import com.kodilla.betlive.mapper.TypeMapper;
 import com.kodilla.betlive.mapper.BetslipMapper;
 import com.kodilla.betlive.mapper.TicketMapper;
-import com.kodilla.betlive.service.BetDbService;
 import com.kodilla.betlive.service.BetslipDbService;
+import com.kodilla.betlive.service.TypeDbService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin("*")
 @RequiredArgsConstructor
@@ -23,39 +21,44 @@ import java.util.List;
 public class BetslipController {
 
     private final BetslipMapper betslipMapper;
-    public final BetMapper betMapper;
+    public final TypeMapper typeMapper;
     public final TicketMapper ticketMapper;
     private final BetslipDbService betslipDbService;
-    private final BetDbService betDbService;
+    private final TypeDbService typeDbService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "getALlBets")
-    public List<BetDto> getAllBets(int betslipId) {
-        List<Bet> bets = betslipDbService.findAllBets(betslipId);
-        return betMapper.maptoBetDtoList(bets);
+    @RequestMapping(method = RequestMethod.GET, value = "getALlTypes", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Set<TypeDto> getAllTypes() {
+        Set<Type> types = betslipDbService.findAllTypes(1);
+        return typeMapper.maptoTypeDtoList(types);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "createBetslip")
-    public BetslipDto createBetslip(BetslipDto betslipDto) {
+    @RequestMapping(method = RequestMethod.POST, value = "createBetslip", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public BetslipDto createBetslip(@RequestBody BetslipDto betslipDto) {
         Betslip betslip = betslipDbService.createBetslip(betslipMapper.mapToBetslip(betslipDto));
-        return  betslipMapper.mapToBetslipDto(betslip);
+        return betslipMapper.mapToBetslipDto(betslip);
 
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "addBet")
-    public void addBet(int betId, int betslipId) {
-        Bet bet = betDbService.findById(betId);
-        betslipDbService.addBet(betslipId,bet);
+    @RequestMapping(method = RequestMethod.POST, value = "addType")
+    public void addType(@RequestParam int typeId,@RequestParam int betslipId) {
+        Type type = typeDbService.findById(typeId);
+        betslipDbService.addType(betslipId, type);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteBet")
-    public void deleteBet(int betId, int betslipId) {
-        Bet bet = betDbService.findById(betId);
-        betslipDbService.deleteBet(betslipId,bet);
+    @RequestMapping(method = RequestMethod.DELETE, value = "deleteType")
+    public void deleteType(@RequestParam int typeId,@RequestParam int betslipId) {
+        Type type = typeDbService.findById(typeId);
+        betslipDbService.deleteType(betslipId, type);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "createTicket", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public TicketDto createTicket(BetslipDto betslipDto) {
-        return ticketMapper.mapToTicketDto(betslipDbService.createTicket(betslipMapper.mapToBetslip(betslipDto)));
+    @RequestMapping(method = RequestMethod.POST, value = "createTicket")
+    public Ticket createTicket(@RequestParam int betslipId) {
+        Betslip betslip = betslipDbService.findBetslip(betslipId);
+        return betslipDbService.createTicket(betslip);
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "deleteBetslip")
+    public void deleteBetslip(@RequestParam int betslipId) {
+        betslipDbService.deleteBetslip(betslipId);
+    }
 }

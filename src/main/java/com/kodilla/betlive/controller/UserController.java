@@ -1,7 +1,6 @@
 package com.kodilla.betlive.controller;
 
 import com.kodilla.betlive.domain.Ticket;
-import com.kodilla.betlive.domain.TicketDto;
 import com.kodilla.betlive.domain.User;
 import com.kodilla.betlive.mapper.TicketMapper;
 import com.kodilla.betlive.service.TicketDbService;
@@ -18,24 +17,28 @@ import java.util.List;
 @RequestMapping("/v1/user")
 public class UserController {
 
-    private final TicketMapper ticketMapper;
+
     private final UserDbService userDbService;
-    private final TicketDbService ticketDbService;
 
 
     @RequestMapping(method = RequestMethod.GET, value = "checkBalance")
-    public BigDecimal checkBalance(int userId) {
+    public BigDecimal checkBalance(@RequestParam int userId) {
         return userDbService.checkBalance(userId);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getAllUsers")
+    public List<User> getAllUsers() {
+        return userDbService.findALlUsers();
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "makeDeposit")
     public void makeDeposit(@RequestParam int userId, @RequestParam BigDecimal ammount) {
-        userDbService.makeDeposit(userId,ammount);
+        userDbService.makeDeposit(userId, ammount);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "withdrawMoney")
     public void withdrawMoney(@RequestParam int userId, @RequestParam BigDecimal ammount) {
-        userDbService.withdrawMoney(userId,ammount);
+        userDbService.withdrawMoney(userId, ammount);
     }
 
 

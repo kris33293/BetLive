@@ -5,6 +5,7 @@ import com.kodilla.betlive.domain.TicketDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -13,7 +14,7 @@ public class TicketMapper {
     public Ticket mapToTicket(final TicketDto ticketDto) {
         Ticket ticket = new Ticket();
         ticket.setTicketId(ticketDto.getTicketId());
-        ticket.setBets(ticketDto.getBets());
+        ticket.setTypes(ticketDto.getTypes());
         ticket.setUser(ticketDto.getUser());
         ticket.setTotalOdds(ticketDto.getTotalOdds());
         ticket.setTotalStake(ticketDto.getTotalStake());
@@ -25,7 +26,7 @@ public class TicketMapper {
     public TicketDto mapToTicketDto(final Ticket ticket) {
         TicketDto ticketDto = new TicketDto(
                 ticket.getTicketId(),
-                ticket.getBets(),
+                ticket.getTypes(),
                 ticket.getUser(),
                 ticket.getTotalOdds(),
                 ticket.getTotalStake(),
@@ -35,10 +36,10 @@ public class TicketMapper {
         return ticketDto;
     }
 
-    public List<TicketDto> maptoTicketDtoList(final List<Ticket> cartList) {
+    public Set<TicketDto> maptoTicketDtoList(final Set<Ticket> cartList) {
         return cartList.stream()
                 .map(this::mapToTicketDto)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
 }

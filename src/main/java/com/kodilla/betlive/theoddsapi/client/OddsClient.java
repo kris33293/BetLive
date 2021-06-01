@@ -1,6 +1,6 @@
 package com.kodilla.betlive.theoddsapi.client;
 
-import com.kodilla.betlive.domain.Data;
+import com.kodilla.betlive.domain.theoddsapi.Data;
 import com.kodilla.betlive.theoddsapi.config.ApiConfig;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -25,13 +25,13 @@ import java.util.*;
 public class OddsClient {
 
 
-    private final RestTemplate restTemplate = restTemplate();
+    private final RestTemplate restTemplate = restTemplates();
     private final ApiConfig apiConfig;
     private static final Logger LOGGER = LoggerFactory.getLogger(OddsClient.class);
 
     public List<Data> getPremierleagueMatches() {
         URI url = UriComponentsBuilder.fromHttpUrl(apiConfig.getApiEndpoint())
-                .queryParam("sport", "soccer_epl")
+                .queryParam("sport", "soccer_sweden_allsvenskan")
                 .queryParam("region", "eu")
                 .queryParam("mkt", "h2h")
                 .queryParam("dateFormat", "iso")
@@ -42,6 +42,8 @@ public class OddsClient {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-RapidAPI-Key", "db5c51d57fmsha3e1f8bd384311cp188de2jsn3c2d86dfce2d");
+        headers.set("x-rapidapi-host", "odds.p.rapidapi.com");
+
 
         HttpEntity entity = new HttpEntity(headers);
 
@@ -59,7 +61,7 @@ public class OddsClient {
     }
 
     @Bean
-    public RestTemplate restTemplate() {
+    public RestTemplate restTemplates() {
         return new RestTemplate();
     }
 

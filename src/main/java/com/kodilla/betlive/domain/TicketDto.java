@@ -5,14 +5,15 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @AllArgsConstructor
 public class TicketDto {
 
     int ticketId;
-    List<Bet> bets;
+    Set<Type> types;
     User user;
     BigDecimal totalOdds, totalStake, toWin;
-    TicketStatus ticketStatus;
+    String ticketStatus;
 }

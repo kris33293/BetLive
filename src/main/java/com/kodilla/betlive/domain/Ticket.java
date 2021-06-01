@@ -9,6 +9,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "TICKETS")
@@ -25,15 +27,10 @@ public class Ticket {
     Integer ticketId;
 
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH,CascadeType.PERSIST})
-    @JoinTable(
-            name = "JOIN_TICKET_BET",
-            joinColumns = {@JoinColumn(name = "JOIN_TICKETID", referencedColumnName = "TICKETID")},
-            inverseJoinColumns = {@JoinColumn(name = "JOIN_BETID", referencedColumnName = "BETID")}
-    )
-    List<Bet> bets;
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "tickets")
+    Set<Type> types;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH,CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
     @JoinColumn(name = "USERID")
     User user;
 
@@ -44,12 +41,25 @@ public class Ticket {
     @Column(name = "TOWIN")
     BigDecimal toWin;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH,CascadeType.PERSIST})
-    @JoinColumn(name = "TICKETSTATUSID")
-    TicketStatus ticketStatus;
 
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "TICKETSTATUS")
+    String ticketStatus;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "BETSLIPID")
     Betslip betslip;
 
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "ticketId=" + ticketId +
+                ", types=" + types +
+                ", user=" + user +
+                ", totalOdds=" + totalOdds +
+                ", totalStake=" + totalStake +
+                ", toWin=" + toWin +
+                ", ticketStatus='" + ticketStatus + '\'' +
+                ", betslip=" + betslip +
+                '}';
+    }
 }

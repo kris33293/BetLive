@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface LeagueDao extends CrudRepository<League, Integer> {
 
     @Override
-    League save (League league);
+    League save(League league);
 }

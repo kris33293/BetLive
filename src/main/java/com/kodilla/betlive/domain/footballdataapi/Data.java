@@ -1,6 +1,7 @@
-package com.kodilla.betlive.domain;
+package com.kodilla.betlive.domain.footballdataapi;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,9 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+public class Data {
 
-public class H2h {
-
-    @JsonProperty("h2h")
-    List<Double> odds;
+    @JsonProperty("matches")
+    private List<ResultsApi> bets;
 }

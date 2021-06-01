@@ -5,24 +5,28 @@ import com.kodilla.betlive.domain.TicketDao;
 import com.kodilla.betlive.domain.User;
 import com.kodilla.betlive.domain.UserDao;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class UserDbService {
 
+    @Autowired
     private final UserDao userDao;
+    @Autowired
     private final TicketDao ticketDao;
 
     public User saveUser(User user) {
         return userDao.save(user);
     }
 
-    public void deleteUserByUserName(String userName) {
-        userDao.deleteUserByUserName(userName);
+    public void deleteUserByUserId(int userId) {
+        userDao.deleteUserByUserId(userId);
     }
 
 
@@ -41,8 +45,10 @@ public class UserDbService {
         user.setBalance(user.getBalance().subtract(ammount));
     }
 
-    public List<Ticket> checkUserTickets(int userId) {
+    public Set<Ticket> checkUserTickets(int userId) {
         return ticketDao.findByUserUserId(userId);
     }
+
+    public List<User> findALlUsers(){ return userDao.findAll();}
 
 }

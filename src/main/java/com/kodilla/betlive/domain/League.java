@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "LEAGUES")
@@ -21,6 +22,13 @@ public class League {
     int leagueId;
     @Column(name = "LEAGUENAME")
     String leagueName;
-    @Column(name = "APILEAGUENAME")
-    String apiLeagueName;
+
+
+    @Override
+    public String toString() {
+        return "League{" +
+                "leagueId=" + leagueId +
+                ", leagueName='" + leagueName + '\'' +
+                '}';
+    }
 }

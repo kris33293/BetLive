@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,11 +37,16 @@ public class Bet {
     @Column(name = "EVENTDATE")
     private Date eventDate;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH,CascadeType.PERSIST}, mappedBy = "bets")
-    private List<Ticket> tickets = new ArrayList<>();
-
-
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH,CascadeType.PERSIST}, mappedBy = "bets")
-    private List<Betslip> betslips = new ArrayList<>();
-
+    @Override
+    public String toString() {
+        return "Bet{" +
+                "betId=" + betId +
+                ", oddHome=" + oddHome +
+                ", oddAway=" + oddAway +
+                ", oddDraw=" + oddDraw +
+                ", homeTeam='" + homeTeam + '\'' +
+                ", awayTeam='" + awayTeam + '\'' +
+                ", eventDate=" + eventDate +
+                '}';
+    }
 }

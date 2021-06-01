@@ -9,7 +9,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
+
+import java.util.Set;
 
 @Setter
 @Getter
@@ -32,18 +33,27 @@ public class User {
     @OneToMany(
             targetEntity = Ticket.class,
             mappedBy = "user",
-            cascade = {CascadeType.MERGE, CascadeType.REFRESH,CascadeType.PERSIST,CascadeType.REMOVE},
+            cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.REMOVE},
             fetch = FetchType.LAZY
     )
-    private List<Ticket> tickets = new ArrayList<>();
+    private Set<Ticket> tickets;
 
     @OneToMany(
             targetEntity = Betslip.class,
             mappedBy = "user",
-            cascade = {CascadeType.MERGE, CascadeType.REFRESH,CascadeType.PERSIST,CascadeType.REMOVE},
+            cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.REMOVE},
             fetch = FetchType.LAZY
     )
-    private List<Betslip> betslips = new ArrayList<>();
+    private Set<Betslip> betslips;
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", balance=" + balance +
+                ", tickets=" + tickets +
+                ", betslips=" + betslips +
+                '}';
+    }
 }

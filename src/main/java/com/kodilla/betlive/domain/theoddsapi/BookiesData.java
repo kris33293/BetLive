@@ -1,4 +1,4 @@
-package com.kodilla.betlive.domain;
+package com.kodilla.betlive.domain.theoddsapi;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

@@ -2,7 +2,9 @@ package com.kodilla.betlive.controller;
 
 import com.kodilla.betlive.client.BetApiToBetClient;
 import com.kodilla.betlive.domain.Bet;
-import com.kodilla.betlive.domain.Data;
+import com.kodilla.betlive.domain.Type;
+import com.kodilla.betlive.domain.TypeDto;
+import com.kodilla.betlive.domain.theoddsapi.Data;
 import com.kodilla.betlive.service.BetDbService;
 import com.kodilla.betlive.theoddsapi.client.OddsClient;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +14,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/v1/oddsapi")
+@RequestMapping("/v1/bet")
 @RequiredArgsConstructor
 public class BetsController {
 
@@ -35,6 +37,12 @@ public class BetsController {
             betDbService.save(bet);
         }
         System.out.println("Premierleague matches saved");
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getAllBets")
+    public List<Bet> getAllTypes() {
+        List<Bet> bets = betDbService.findAll();
+       return bets;
     }
 }
 

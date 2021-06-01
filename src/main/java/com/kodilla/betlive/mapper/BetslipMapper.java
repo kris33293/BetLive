@@ -10,7 +10,7 @@ public class BetslipMapper {
     public BetslipDto mapToBetslipDto(final Betslip betslip) {
         BetslipDto betslipDto = new BetslipDto();
         betslipDto.setBetslipId(betslip.getBetslipId());
-        betslipDto.setBets(betslip.getBets());
+        betslipDto.setTypes(betslip.getTypes());
         betslipDto.setUser(betslip.getUser());
         betslipDto.setTotalOdds(betslip.getTotalOdds());
         betslipDto.setTotalStake(betslip.getTotalStake());
@@ -22,7 +22,7 @@ public class BetslipMapper {
     public Betslip mapToBetslip(final BetslipDto betslipDto) {
         Betslip betslip = new Betslip();
         betslip.setBetslipId(betslipDto.getBetslipId());
-        betslip.setBets(betslipDto.getBets());
+        betslip.setTypes(betslipDto.getTypes());
         betslip.setTotalOdds(betslipDto.getTotalOdds());
         betslip.setTotalStake(betslipDto.getTotalStake());
         betslip.setToWin(betslipDto.getToWin());

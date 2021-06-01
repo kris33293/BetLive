@@ -1,6 +1,5 @@
 package com.kodilla.betlive.domain;
 
-import com.kodilla.betlive.controller.BetslipController;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,17 +7,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @Transactional
-public class UserTestSuite {
+class UserTest {
 
     @Autowired
     private UserDao userDao;
@@ -29,22 +27,192 @@ public class UserTestSuite {
     @Autowired
     private BetslipDao betslipDao;
 
+
     @Test
-    public void testAddNewUser() {
+    void setUserId() {
         //Given
         User user = new User();
-        user.setBalance(new BigDecimal(20.0));
-        user.setUserName("username");
 
         //When
-        userDao.save(user);
+        User newUser = userDao.save(user);
 
         //Then
-        int id = user.getUserId();
-        assertNotEquals(0, id);
+        assertNotEquals(0, newUser.getUserId());
 
-        //CleanUp
-        userDao.deleteById(id);
+        //Cleanup
+        userDao.delete(newUser);
+    }
+
+    @Test
+    void setUserName() {
+        //Given
+        User user = new User();
+        user.setUserName("username");
+        //When
+        User newUser = userDao.save(user);
+
+        //Then
+        assertEquals("username", newUser.getUserName());
+
+        //Cleanup
+        userDao.delete(newUser);
+    }
+
+    @Test
+    void setBalance() {
+        //Given
+        User user = new User();
+        user.setBalance(new BigDecimal(200));
+        //When
+        User newUser = userDao.save(user);
+
+        //Then
+        assertEquals(new BigDecimal(200), newUser.getBalance());
+
+        //Cleanup
+        userDao.delete(newUser);
+    }
+
+    @Test
+    void setTickets() {
+        //Given
+        User user = new User();
+
+        Ticket ticket = new Ticket();
+        ticket.setTicketStatus("checked");
+
+        List<Ticket> ticketList = new ArrayList<>();
+        ticketList.add(ticket);
+
+        user.setTickets(ticketList);
+
+
+        //When
+        User newUser = userDao.save(user);
+
+        //Then
+        assertEquals("checked", newUser.getTickets().get(0).ticketStatus);
+
+        //Cleanup
+        userDao.delete(newUser);
+
+    }
+
+    @Test
+    void setBetslips() {
+        //Given
+        User user = new User();
+
+        Betslip betslip = new Betslip();
+        betslip.setToWin(new BigDecimal(200));
+
+        List<Betslip> betslipList = new ArrayList<>();
+        betslipList.add(betslip);
+
+        user.setBetslips(betslipList);
+
+
+        //When
+        User newUser = userDao.save(user);
+
+        //Then
+        assertEquals(new BigDecimal(200), newUser.getBetslips().get(0).getToWin());
+
+        //Cleanup
+        userDao.delete(newUser);
+    }
+
+    @Test
+    void getUserId() {
+        //Given
+        User user = new User();
+
+        //When
+        User newUser = userDao.save(user);
+
+        //Then
+        assertNotEquals(0, newUser.getUserId());
+
+        //Cleanup
+        userDao.delete(newUser);
+    }
+
+    @Test
+    void getUserName() {
+        //Given
+        User user = new User();
+        user.setUserName("username");
+        //When
+        User newUser = userDao.save(user);
+
+        //Then
+        assertEquals("username", newUser.getUserName());
+
+        //Cleanup
+        userDao.delete(newUser);
+    }
+
+    @Test
+    void getBalance() {
+        //Given
+        User user = new User();
+        user.setBalance(new BigDecimal(200));
+        //When
+        User newUser = userDao.save(user);
+
+        //Then
+        assertEquals(new BigDecimal(200), newUser.getBalance());
+
+        //Cleanup
+        userDao.delete(newUser);
+    }
+
+    @Test
+    void getTickets() {
+        //Given
+        User user = new User();
+
+        Ticket ticket = new Ticket();
+        ticket.setTicketStatus("checked");
+
+        List<Ticket> ticketList = new ArrayList<>();
+        ticketList.add(ticket);
+
+        user.setTickets(ticketList);
+
+
+        //When
+        User newUser = userDao.save(user);
+
+        //Then
+        assertEquals("checked", newUser.getTickets().get(0).ticketStatus);
+
+        //Cleanup
+        userDao.delete(newUser);
+    }
+
+    @Test
+    void getBetslips() {
+        //Given
+        User user = new User();
+
+        Betslip betslip = new Betslip();
+        betslip.setToWin(new BigDecimal(200));
+
+        List<Betslip> betslipList = new ArrayList<>();
+        betslipList.add(betslip);
+
+        user.setBetslips(betslipList);
+
+
+        //When
+        User newUser = userDao.save(user);
+
+        //Then
+        assertEquals(new BigDecimal(200), newUser.getBetslips().get(0).getToWin());
+
+        //Cleanup
+        userDao.delete(newUser);
     }
 
     @Test
@@ -53,7 +221,7 @@ public class UserTestSuite {
         User user = new User();
         Ticket ticket = new Ticket();
 
-        ticket.setTicketStatus(new TicketStatus());
+
         ticket.setTotalOdds(new BigDecimal(20.0));
         ticket.setTotalStake(new BigDecimal(10.0));
         ticket.setToWin(new BigDecimal(200.0));
@@ -116,7 +284,7 @@ public class UserTestSuite {
         int betslipId = betslip.getBetslipId();
         int userBetslipId = user.getBetslips().get(0).getBetslipId();
 
-        assertEquals(userId,betslipUserId);
+        assertEquals(userId, betslipUserId);
         assertEquals(betslipId, userBetslipId);
 
         //CleanUp
@@ -163,7 +331,7 @@ public class UserTestSuite {
         User user = new User();
         Ticket ticket = new Ticket();
 
-        ticket.setTicketStatus(new TicketStatus());
+
         ticket.setTotalOdds(new BigDecimal(20.0));
         ticket.setTotalStake(new BigDecimal(10.0));
         ticket.setToWin(new BigDecimal(200.0));
