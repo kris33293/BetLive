@@ -27,10 +27,10 @@ public class Ticket {
     int ticketId;
 
 
-    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "tickets")
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "tickets")
     List<Type> types;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "USERID")
     User user;
 
@@ -45,7 +45,7 @@ public class Ticket {
     @JoinColumn(name = "TICKETSTATUS")
     String ticketStatus;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "BETSLIPID")
     Betslip betslip;
 

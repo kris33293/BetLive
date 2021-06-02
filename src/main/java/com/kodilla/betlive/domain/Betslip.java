@@ -26,7 +26,7 @@ public class Betslip {
     @Column(name = "BETSLIPID", unique = true)
     Integer betslipId;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
             name = "JOIN_BETSLIP_TYPE",
             joinColumns = {@JoinColumn(name = "BETSLIPID", referencedColumnName = "BETSLIPID")},
@@ -35,7 +35,7 @@ public class Betslip {
 
     List<Type> types;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "USERID")
     User user;
 

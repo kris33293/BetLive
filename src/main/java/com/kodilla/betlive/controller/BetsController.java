@@ -45,5 +45,11 @@ public class BetsController {
         List<Bet> bets = betDbService.findAll();
        return bets;
     }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "deleteAllBets")
+    public void deleteAllTypes() {
+        betDbService.deleteAll();
+
+    }
 }
 

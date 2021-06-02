@@ -1,5 +1,6 @@
 package com.kodilla.betlive.controller;
 
+import com.kodilla.betlive.domain.Betslip;
 import com.kodilla.betlive.domain.Ticket;
 import com.kodilla.betlive.domain.User;
 import com.kodilla.betlive.mapper.TicketMapper;
@@ -20,6 +21,10 @@ public class UserController {
 
     private final UserDbService userDbService;
 
+    @RequestMapping(method = RequestMethod.POST, value = "createUser")
+    public User createUser(@RequestBody User user) {
+        return userDbService.saveUser(user);
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "checkBalance")
     public BigDecimal checkBalance(@RequestParam int userId) {

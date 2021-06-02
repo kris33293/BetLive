@@ -31,11 +31,11 @@ public class Type {
     @Column(name = "TYPE")
     private String yourType;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "types")
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER, mappedBy = "types")
     private List<Betslip> betslips ;
 
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
             name = "JOIN_TICKET_TYPE",
             joinColumns = {@JoinColumn(name = "TYPEID", referencedColumnName = "TYPEID")},

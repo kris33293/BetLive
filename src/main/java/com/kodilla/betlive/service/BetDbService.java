@@ -26,4 +26,6 @@ public class BetDbService {
 
     public List<Bet> findAll() { return betDao.findAll();}
 
+    public void deleteAll() { betDao.deleteAll();}
+
 }

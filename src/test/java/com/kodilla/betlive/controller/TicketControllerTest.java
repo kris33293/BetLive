@@ -39,7 +39,7 @@ class TicketControllerTest {
         ticketDao.save(ticket);
 
         //When
-        List<TicketDto> tickets = ticketController.getAllTickets();
+        List<Ticket> tickets = ticketController.getAllTickets();
 
         //Then
         assertEquals(ticket.getTicketStatus(), tickets.get(0).getTicketStatus());

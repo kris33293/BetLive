@@ -1,6 +1,7 @@
 package com.kodilla.betlive.sheduler;
 
 import com.kodilla.betlive.client.CheckStatusClient;
+import com.kodilla.betlive.controller.ResultsController;
 import com.kodilla.betlive.domain.Result;
 import com.kodilla.betlive.domain.Ticket;
 import com.kodilla.betlive.service.ResultDbService;
@@ -18,11 +19,13 @@ public class CheckTicketsSheduler {
 
     CheckStatusClient checkStatusClient;
     TicketDbService ticketDbService;
+    ResultsController resultsController;
     ResultDbService resultDbService;
 
     @Scheduled(cron = "0 0 0 * * * " )
     public void checkTicketStatus(){
         List<Ticket> tickets = ticketDbService.findAllTickets();
+        resultsController.savePremierleagueResults();
         List<Result> results = resultDbService.findAll();
         for (Ticket ticket : tickets) {
             checkStatusClient.checkTicket(ticket,results);

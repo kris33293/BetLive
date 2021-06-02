@@ -34,7 +34,7 @@ public class User {
     @OneToMany(
             targetEntity = Ticket.class,
             mappedBy = "user",
-            cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.REMOVE},
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST},
             fetch = FetchType.LAZY
     )
     private List<Ticket> tickets;
@@ -42,7 +42,7 @@ public class User {
     @OneToMany(
             targetEntity = Betslip.class,
             mappedBy = "user",
-            cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.REMOVE},
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST},
             fetch = FetchType.LAZY
     )
     private List<Betslip> betslips;

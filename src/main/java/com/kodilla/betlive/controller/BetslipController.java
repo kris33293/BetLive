@@ -27,9 +27,9 @@ public class BetslipController {
     private final TypeDbService typeDbService;
 
     @RequestMapping(method = RequestMethod.GET, value = "getALlTypes", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<TypeDto> getAllTypes() {
+    public List<Type> getAllTypes() {
         List<Type> types = betslipDbService.findAllTypes(1);
-        return typeMapper.maptoTypeDtoList(types);
+        return types;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getBetslip", produces = MediaType.APPLICATION_JSON_VALUE)
