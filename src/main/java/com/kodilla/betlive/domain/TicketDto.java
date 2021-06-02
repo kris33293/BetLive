@@ -14,6 +14,9 @@ public class TicketDto {
     int ticketId;
     Set<Type> types;
     User user;
-    BigDecimal totalOdds, totalStake, toWin;
+    BigDecimal totalOdds;
+    BigDecimal totalStake;
+    BigDecimal toWin;
     String ticketStatus;
+    Betslip betslip;
 }

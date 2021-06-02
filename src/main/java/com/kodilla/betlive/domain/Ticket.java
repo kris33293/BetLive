@@ -24,7 +24,7 @@ public class Ticket {
     @NotNull
     @GeneratedValue
     @Column(name = "TICKETID", unique = true)
-    Integer ticketId;
+    int ticketId;
 
 
     @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "tickets")

@@ -38,11 +38,13 @@ public class UserDbService {
     public void makeDeposit(int userId, BigDecimal ammount) {
         User user = userDao.findByUserId(userId);
         user.setBalance(user.getBalance().add(ammount));
+        userDao.save(user);
     }
 
     public void withdrawMoney(int userId, BigDecimal ammount) {
         User user = userDao.findByUserId(userId);
         user.setBalance(user.getBalance().subtract(ammount));
+        userDao.save(user);
     }
 
     public Set<Ticket> checkUserTickets(int userId) {

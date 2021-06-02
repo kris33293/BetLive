@@ -32,6 +32,12 @@ public class BetslipController {
         return typeMapper.maptoTypeDtoList(types);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "getBetslip", produces = MediaType.APPLICATION_JSON_VALUE)
+    public BetslipDto getBetslip(@RequestParam int betslipId) {
+        Betslip betslip =  betslipDbService.findBetslip(betslipId);
+        return betslipMapper.mapToBetslipDto(betslip);
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "createBetslip", consumes = MediaType.APPLICATION_JSON_VALUE)
     public BetslipDto createBetslip(@RequestBody BetslipDto betslipDto) {
         Betslip betslip = betslipDbService.createBetslip(betslipMapper.mapToBetslip(betslipDto));
@@ -39,7 +45,14 @@ public class BetslipController {
 
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "addType")
+    @RequestMapping(method = RequestMethod.PUT, value = "saveBetslip", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public BetslipDto saveBetslip(@RequestBody BetslipDto betslipDto) {
+        Betslip betslip = betslipDbService.createBetslip(betslipMapper.mapToBetslip(betslipDto));
+        return betslipMapper.mapToBetslipDto(betslip);
+
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "addType", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addType(@RequestParam int typeId,@RequestParam int betslipId) {
         Type type = typeDbService.findById(typeId);
         betslipDbService.addType(betslipId, type);

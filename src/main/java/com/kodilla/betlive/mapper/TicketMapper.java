@@ -31,7 +31,8 @@ public class TicketMapper {
                 ticket.getTotalOdds(),
                 ticket.getTotalStake(),
                 ticket.getToWin(),
-                ticket.getTicketStatus());
+                ticket.getTicketStatus(),
+                ticket.getBetslip());
 
         return ticketDto;
     }

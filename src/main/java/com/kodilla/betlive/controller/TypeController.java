@@ -17,7 +17,7 @@ public class TypeController {
 
     private final TypeDbService typeDbService;
 
-    @RequestMapping(method = RequestMethod.POST, value = "createType", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "createType", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Type createType(@RequestBody Type type) {
         Type typeTosave = type;
         Type savedType = typeDbService.save(typeTosave);

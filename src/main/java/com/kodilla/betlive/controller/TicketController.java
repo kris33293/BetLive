@@ -19,7 +19,7 @@ import java.util.Set;
 @CrossOrigin("*")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/v1/ticket")
+@RequestMapping("/v1/tickets")
 public class TicketController {
 
     public final TicketMapper ticketMapper;

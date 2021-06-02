@@ -2,6 +2,7 @@ package com.kodilla.betlive.controller;
 
 import com.kodilla.betlive.domain.Type;
 import com.kodilla.betlive.domain.TypeDao;
+import com.kodilla.betlive.mapper.TypeMapper;
 import com.kodilla.betlive.service.TypeDbService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +22,9 @@ class TypeControllerTest {
     @Autowired
     TypeController typeController;
 
+
+    TypeMapper typeMapper;
+
     @Autowired
     TypeDao typeDao;
 
@@ -31,7 +35,7 @@ class TypeControllerTest {
         type.setYourType("HOME_WIN");
 
         //When
-        Type newType = typeController.createType(type);
+        Type newType =typeController.createType(type);
 
         //Then
         assertEquals(type.getYourType(), newType.getYourType());

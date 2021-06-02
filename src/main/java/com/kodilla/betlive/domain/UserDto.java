@@ -12,4 +12,5 @@ public class UserDto {
     private int userId;
     private String userName;
     private BigDecimal balance;
+
 }
