@@ -37,6 +37,55 @@ public class Bet {
     @Column(name = "EVENTDATE")
     private Date eventDate;
 
+    public static class BetBuilder {
+        private int betId;
+        private double oddHome;
+        private double oddAway;
+        private double oddDraw;
+        private String homeTeam;
+        private String awayTeam;
+        private Date eventDate;
+
+        public BetBuilder betId(int betId){
+            this.betId = betId;
+            return this;
+        }
+
+        public BetBuilder oddHome(double oddHome){
+            this.oddHome = oddHome;
+            return this;
+        }
+
+        public BetBuilder oddAway(double oddAway){
+            this.oddAway = oddAway;
+            return this;
+        }
+
+        public BetBuilder oddDraw(double oddDraw){
+            this.oddDraw = oddDraw;
+            return this;
+        }
+
+        public BetBuilder homeTeam(String homeTeam){
+            this.homeTeam = homeTeam;
+            return this;
+        }
+
+        public BetBuilder awayTeam(String awayTeam){
+            this.awayTeam = awayTeam;
+            return this;
+        }
+
+        public BetBuilder eventDate(Date eventDate){
+            this.eventDate = eventDate;
+            return this;
+        }
+
+        public Bet build(){
+            return new Bet(betId,oddHome,oddAway,oddDraw,homeTeam,awayTeam,eventDate);
+        }
+
+    }
     @Override
     public String toString() {
         return "Bet{" +

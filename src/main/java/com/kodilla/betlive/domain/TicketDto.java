@@ -12,7 +12,7 @@ import java.util.Set;
 public class TicketDto {
 
     int ticketId;
-    Set<Type> types;
+    List<Type> types;
     User user;
     BigDecimal totalOdds;
     BigDecimal totalStake;

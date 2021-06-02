@@ -34,10 +34,10 @@ public class TypeMapper {
         return type;
     }
 
-    public Set<TypeDto> maptoTypeDtoList(final Set<Type> typeList) {
+    public List<TypeDto> maptoTypeDtoList(final List<Type> typeList) {
         return typeList.stream()
                 .map(this::mapToTypeDto)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     public List<Type> maptoTypeList(final List<TypeDto> typeList) {

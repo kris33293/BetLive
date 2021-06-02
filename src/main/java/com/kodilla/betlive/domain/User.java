@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -36,7 +37,7 @@ public class User {
             cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.REMOVE},
             fetch = FetchType.LAZY
     )
-    private Set<Ticket> tickets;
+    private List<Ticket> tickets;
 
     @OneToMany(
             targetEntity = Betslip.class,
@@ -44,7 +45,7 @@ public class User {
             cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.REMOVE},
             fetch = FetchType.LAZY
     )
-    private Set<Betslip> betslips;
+    private List<Betslip> betslips;
 
     @Override
     public String toString() {

@@ -27,8 +27,8 @@ public class TicketController {
     public final ResultDbService resultDbService;
 
     @RequestMapping(method = RequestMethod.GET, value = "getALlTickets")
-    public Set<TicketDto> getAllTickets() {
-        Set<Ticket> tickets = ticketDbService.findAllTickets();
+    public List<TicketDto> getAllTickets() {
+        List<Ticket> tickets = ticketDbService.findAllTickets();
         return ticketMapper.maptoTicketDtoList(tickets);
     }
 
@@ -43,8 +43,8 @@ public class TicketController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getUserTickets")
-    public Set<TicketDto> getUserTicket(@RequestParam int userId) {
-        Set<Ticket> tickets = ticketDbService.findTicketsByUserId(userId);
+    public List<TicketDto> getUserTicket(@RequestParam int userId) {
+        List<Ticket> tickets = ticketDbService.findTicketsByUserId(userId);
         return ticketMapper.maptoTicketDtoList(tickets);
     }
 
@@ -52,8 +52,8 @@ public class TicketController {
     public void checkTicketStatus(@RequestParam int ticketId) {
         Ticket ticket = ticketDbService.findByTicketId(ticketId);
         List<Result> results = resultDbService.findAll();
-        CheckStatusClient checkStatusClient = new CheckStatusClient(ticket, results);
-        Ticket checkedTicket = checkStatusClient.checkTicket();
+        CheckStatusClient checkStatusClient = new CheckStatusClient();
+        Ticket checkedTicket = checkStatusClient.checkTicket(ticket, results);
         ticketDbService.createTicket(checkedTicket);
         System.out.println("Ticket checked");
     }

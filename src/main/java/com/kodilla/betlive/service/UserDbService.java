@@ -47,7 +47,7 @@ public class UserDbService {
         userDao.save(user);
     }
 
-    public Set<Ticket> checkUserTickets(int userId) {
+    public List<Ticket> checkUserTickets(int userId) {
         return ticketDao.findByUserUserId(userId);
     }
 

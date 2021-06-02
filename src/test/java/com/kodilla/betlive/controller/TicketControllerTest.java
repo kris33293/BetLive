@@ -39,10 +39,10 @@ class TicketControllerTest {
         ticketDao.save(ticket);
 
         //When
-        Set<TicketDto> tickets = ticketController.getAllTickets();
+        List<TicketDto> tickets = ticketController.getAllTickets();
 
         //Then
-        assertEquals(ticket.getTicketStatus(), tickets.equals(ticket.getTicketStatus()));
+        assertEquals(ticket.getTicketStatus(), tickets.get(0).getTicketStatus());
 
         //Cleanup
         ticketDao.delete(ticket);
@@ -75,10 +75,10 @@ class TicketControllerTest {
         ticketDao.save(ticket);
 
         //When
-        Set<TicketDto> tickets = ticketController.getUserTicket(user.getUserId());
+        List<TicketDto> tickets = ticketController.getUserTicket(user.getUserId());
 
         //Then
-        assertEquals(ticket.getTicketStatus(), tickets.equals(ticket.getTicketStatus()));
+        assertEquals(ticket.getTicketStatus(), tickets.get(0).getTicketStatus());
 
         //Cleanup
         ticketDao.delete(ticket);
@@ -92,17 +92,7 @@ class TicketControllerTest {
         ticket.setTicketStatus("WIN");
         Type type = new Type();
         type.setYourType("HOME_WIN");
-        Set<Type> types = new AbstractSet<Type>() {
-            @Override
-            public Iterator<Type> iterator() {
-                return null;
-            }
-
-            @Override
-            public int size() {
-                return 0;
-            }
-        };
+        List<Type> types = new ArrayList<>();
         types.add(type);
         ticket.setTypes(types);
         ticketDao.save(ticket);

@@ -42,27 +42,17 @@ class BetslipControllerTest {
         Betslip betslip = new Betslip();
         Type type = new Type();
         type.setYourType("type");
-        Set<Type> types = new AbstractSet<Type>() {
-            @Override
-            public Iterator<Type> iterator() {
-                return null;
-            }
-
-            @Override
-            public int size() {
-                return 0;
-            }
-        };
+        List<Type> types = new ArrayList<>();
 
         types.add(type);
         betslip.setTypes(types);
         betslipDbService.createBetslip(betslip);
 
         //When
-        Set<TypeDto> searchedTypes = betslipController.getAllTypes();
+        List<Type> searchedTypes = betslipController.getBetslip(betslip.getBetslipId()).getTypes();
 
         //Then
-        assertEquals("type", searchedTypes.equals(type.getYourType()));
+        assertEquals("type", searchedTypes.get(0).getYourType());
 
         //Clean up
         betslipDao.delete(betslip);
@@ -88,17 +78,7 @@ class BetslipControllerTest {
     void addType() {
         //Given
         Betslip betslip = new Betslip();
-        Set<Type> types = new AbstractSet<Type>() {
-            @Override
-            public Iterator<Type> iterator() {
-                return null;
-            }
-
-            @Override
-            public int size() {
-                return 0;
-            }
-        };
+        List<Type> types = new ArrayList<>();
 
         betslip.setTypes(types);
         Type type = new Type();
@@ -120,17 +100,7 @@ class BetslipControllerTest {
     void deleteType() {
         //Given
         Betslip betslip = new Betslip();
-        Set<Type> types = new AbstractSet<Type>() {
-            @Override
-            public Iterator<Type> iterator() {
-                return null;
-            }
-
-            @Override
-            public int size() {
-                return 0;
-            }
-        };
+        List<Type> types = new ArrayList<>();
 
         betslip.setTypes(types);
         Type type = new Type();

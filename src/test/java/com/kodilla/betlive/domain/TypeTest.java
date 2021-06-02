@@ -8,9 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -73,13 +71,13 @@ class TypeTest {
     void setEventDate() {
         //Given
         Type type = new Type();
-        type.setEventDate(new Date(22 / 02 / 20));
+        type.setEventDate("22 / 02 / 20");
 
         //When
         Type newType = typeDao.save(type);
 
         //Then
-        assertEquals(new Date(22 / 02 / 20), newType.getEventDate());
+        assertEquals("22 / 02 / 20", newType.getEventDate());
 
         //Clean up
         typeDao.delete(newType);
@@ -145,7 +143,7 @@ class TypeTest {
         Type type = new Type();
         Ticket ticket = new Ticket();
         ticket.setToWin(new BigDecimal(200));
-        List<Ticket> tickets = new ArrayList<>();
+        List<Ticket> tickets =new ArrayList<>();
         tickets.add(ticket);
         type.setTickets(tickets);
 
@@ -210,13 +208,13 @@ class TypeTest {
     void getEventDate() {
         //Given
         Type type = new Type();
-        type.setEventDate(new Date(22 / 02 / 20));
+        type.setEventDate("22 / 02 / 20");
 
         //When
         Type newType = typeDao.save(type);
 
         //Then
-        assertEquals(new Date(22 / 02 / 20), newType.getEventDate());
+        assertEquals("22 / 02 / 20", newType.getEventDate());
 
         //Clean up
         typeDao.delete(newType);

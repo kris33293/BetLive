@@ -37,10 +37,10 @@ public class TicketMapper {
         return ticketDto;
     }
 
-    public Set<TicketDto> maptoTicketDtoList(final Set<Ticket> cartList) {
+    public List<TicketDto> maptoTicketDtoList(final List<Ticket> cartList) {
         return cartList.stream()
                 .map(this::mapToTicketDto)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
 }

@@ -24,11 +24,11 @@ public class TicketDbService {
         return ticketDao.findByTicketId(ticketId);
     }
 
-    public Set<Ticket> findTicketsByUserId(int userId) {
+    public List<Ticket> findTicketsByUserId(int userId) {
         return ticketDao.findByUserUserId(userId);
     }
 
-    public Set<Ticket> findAllTickets() {
+    public List<Ticket> findAllTickets() {
         return ticketDao.findAll();
     }
 

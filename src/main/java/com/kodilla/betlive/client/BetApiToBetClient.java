@@ -27,14 +27,16 @@ public class BetApiToBetClient {
         List<Bet> resultList = new ArrayList<>();
 
         for (BetApi betApi : results) {
-            Bet bet = new Bet();
-            bet.setBetId(betApi.getBetid());
-            bet.setHomeTeam(betApi.getTeams().get(0));
-            bet.setAwayTeam(betApi.getTeams().get(1));
-            bet.setOddHome(betApi.getOddsBase().get(0).getOddsSet().getOdds().get(0));
-            bet.setOddAway(betApi.getOddsBase().get(0).getOddsSet().getOdds().get(1));
-            bet.setOddDraw(betApi.getOddsBase().get(0).getOddsSet().getOdds().get(2));
-            bet.setEventDate(betApi.getEventDate());
+            Bet bet = new Bet.BetBuilder()
+                    .betId(betApi.getBetid())
+                    .awayTeam(betApi.getTeams().get(1))
+                    .homeTeam(betApi.getTeams().get(0))
+                    .eventDate(betApi.getEventDate())
+                    .oddAway(betApi.getOddsBase().get(0).getOddsSet().getOdds().get(1))
+                    .oddDraw(betApi.getOddsBase().get(0).getOddsSet().getOdds().get(2))
+                    .oddHome(betApi.getOddsBase().get(0).getOddsSet().getOdds().get(0))
+                    .build();
+
             resultList.add(bet);
         }
         return resultList;

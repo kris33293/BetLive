@@ -12,6 +12,8 @@ public class UserMapper {
         user.setUserId(userDto.getUserId());
         user.setBalance(userDto.getBalance());
         user.setUserName(userDto.getUserName());
+        user.setBetslips(userDto.getBetslips());
+        user.setTickets(userDto.getTickets());
         return user;
     }
 
@@ -19,7 +21,9 @@ public class UserMapper {
         return new UserDto(
                 user.getUserId(),
                 user.getUserName(),
-                user.getBalance()
+                user.getBalance(),
+                user.getBetslips(),
+                user.getTickets()
         );
     }
 }

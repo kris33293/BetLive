@@ -3,24 +3,18 @@ package com.kodilla.betlive.client;
 import com.kodilla.betlive.domain.Result;
 import com.kodilla.betlive.domain.Ticket;
 import com.kodilla.betlive.domain.Type;
+import com.kodilla.betlive.domain.User;
 
 import java.util.List;
 import java.util.Set;
 
 public class CheckStatusClient {
 
-    private Ticket ticket;
 
-    private List<Result> resultList;
 
-    public CheckStatusClient(Ticket ticket, List<Result> resultList) {
-        this.ticket = ticket;
-        this.resultList = resultList;
-    }
-
-    public Ticket checkTicket() {
+    public Ticket checkTicket(Ticket ticket, List<Result> resultList) {
         int wins = 0;
-        Set<Type> checkingTypes = ticket.getTypes();
+        List<Type> checkingTypes = ticket.getTypes();
         int size = checkingTypes.size();
 
         for (Type type : checkingTypes) {
@@ -38,7 +32,9 @@ public class CheckStatusClient {
 
         if (wins == size) {
             ticket.setTicketStatus("Win");
-        } else ticket.setTicketStatus("Pending");
+            User user = ticket.getUser();
+            user.setBalance(user.getBalance().add(ticket.getToWin()));
+        }  else ticket.setTicketStatus("Pending");
 
         return ticket;
     }

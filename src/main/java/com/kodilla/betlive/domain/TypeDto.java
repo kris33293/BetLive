@@ -22,6 +22,6 @@ public class TypeDto {
     String eventDate;
     double odd;
     String yourType;
-    Set<Betslip> betslips;
-    Set<Ticket> tickets;
+    List<Betslip> betslips;
+    List<Ticket> tickets;
 }

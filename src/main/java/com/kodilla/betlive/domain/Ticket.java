@@ -28,7 +28,7 @@ public class Ticket {
 
 
     @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "tickets")
-    Set<Type> types;
+    List<Type> types;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
     @JoinColumn(name = "USERID")

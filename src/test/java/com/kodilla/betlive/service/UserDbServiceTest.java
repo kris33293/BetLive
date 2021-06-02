@@ -115,17 +115,7 @@ class UserDbServiceTest {
         Ticket ticket = new Ticket();
         ticket.setUser(user);
         ticket.setTicketStatus("WIN");
-        Set<Ticket> tickets = new AbstractSet<Ticket>() {
-            @Override
-            public Iterator<Ticket> iterator() {
-                return null;
-            }
-
-            @Override
-            public int size() {
-                return 0;
-            }
-        };
+        List<Ticket> tickets = new ArrayList<>();
         tickets.add(ticket);
         user.setTickets(tickets);
         userDbService.saveUser(user);

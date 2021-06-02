@@ -32,7 +32,7 @@ public class Type {
     private String yourType;
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "types")
-    private Set<Betslip> betslips ;
+    private List<Betslip> betslips ;
 
 
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -42,7 +42,7 @@ public class Type {
             inverseJoinColumns = {@JoinColumn(name = "TICKETID", referencedColumnName = "TICKETID")}, uniqueConstraints = @UniqueConstraint(columnNames = {
             "TICKETID", "TYPEID" }))
 
-    private Set<Ticket> tickets;
+    private List<Ticket> tickets;
 
     @Override
     public String toString() {

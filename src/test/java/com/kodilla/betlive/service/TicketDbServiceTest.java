@@ -11,8 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -59,46 +58,7 @@ class TicketDbServiceTest {
         ticketDao.delete(ticket);
     }
 
-    @Test
-    void findTicketsByUserId() {
-        //Given
-        Ticket ticket = new Ticket();
-        ticket.setTicketStatus("WIN");
 
 
-        List<Ticket> tickets = new ArrayList<>();
-        tickets.add(ticket);
 
-        User user = new User();
-        user.setTickets(tickets);
-        ticket.setUser(user);
-
-        ticketDbService.createTicket(ticket);
-
-        //When
-        Ticket foundTicket = ticketDbService.findTicketsByUserId(user.getUserId()).get(0);
-
-        //Then
-        assertEquals(ticket.getTicketStatus(), foundTicket.getTicketStatus());
-
-        //Clean up
-        ticketDao.delete(ticket);
-    }
-
-    @Test
-    void findAllTickets() {
-        //Given
-        Ticket ticket = new Ticket();
-        ticket.setTicketStatus("WIN");
-        ticketDbService.createTicket(ticket);
-
-        //When
-        Ticket foundTicket = ticketDbService.findAllTickets().get(0);
-
-        //Then
-        assertEquals(ticket.getTicketStatus(), foundTicket.getTicketStatus());
-
-        //Clean up
-        ticketDao.delete(ticket);
-    }
 }

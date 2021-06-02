@@ -4,7 +4,7 @@ import com.kodilla.betlive.client.ResultsApitoResultClient;
 
 import com.kodilla.betlive.domain.Result;
 import com.kodilla.betlive.domain.footballdataapi.Data;
-import com.kodilla.betlive.footballdataapi.client.FootballClient;
+import com.kodilla.betlive.footballdataapi.FootballFacade;
 import com.kodilla.betlive.service.ResultDbService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +17,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ResultsController {
 
-    private final FootballClient footballClient;
+    private final FootballFacade footballFacade;
     private final ResultDbService resultDbService;
 
     @GetMapping("getPremierleagueResults")
     public List<Data> getPremierleagueResults() {
-        return footballClient.getPremierleagueScores();
+        return footballFacade.getResults();
     }
 
     @PostMapping("savePremierleagueResults")

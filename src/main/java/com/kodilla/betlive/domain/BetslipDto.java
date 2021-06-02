@@ -16,7 +16,7 @@ import java.util.Set;
 public class BetslipDto {
 
     int betslipId;
-    Set<Type> types;
+    List<Type> types;
     User user;
     BigDecimal totalOdds, totalStake, toWin;
     Ticket ticket;

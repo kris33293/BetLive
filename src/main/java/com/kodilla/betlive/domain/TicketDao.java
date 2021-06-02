@@ -10,9 +10,9 @@ public interface TicketDao extends CrudRepository<Ticket, Integer> {
     @Override
     Ticket save(Ticket ticket);
 
-    Set<Ticket> findAll();
+    List<Ticket> findAll();
 
-    Set<Ticket> findByUserUserId(int userId);
+    List<Ticket> findByUserUserId(int userId);
 
     Ticket findByTicketId(int ticketId);
 

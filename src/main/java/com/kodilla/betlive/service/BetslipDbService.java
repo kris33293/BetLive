@@ -26,14 +26,14 @@ public class BetslipDbService {
         return betslipDao.findBetslipByBetslipId(betslipId);
     }
 
-    public Set<Type> findAllTypes(int betslipId) {
+    public List<Type> findAllTypes(int betslipId) {
         Betslip betslip = betslipDao.findBetslipByBetslipId(betslipId);
         return betslip.getTypes();
     }
 
     public void addType(int betslipId, Type type) {
         Betslip betslip = betslipDao.findBetslipByBetslipId(betslipId);
-        Set<Type> types = betslip.getTypes();
+        List<Type> types = betslip.getTypes();
         types.add(type);
         betslip.setTypes(types);
         betslipDao.save(betslip);
@@ -41,7 +41,7 @@ public class BetslipDbService {
 
     public void deleteType(int betslipId, Type type) {
         Betslip betslip = betslipDao.findBetslipByBetslipId(betslipId);
-        Set<Type> types = betslip.getTypes();
+        List<Type> types = betslip.getTypes();
         types.remove(type);
         betslip.setTypes(types);
         betslipDao.save(betslip);

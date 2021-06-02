@@ -33,7 +33,7 @@ public class Betslip {
             inverseJoinColumns = {@JoinColumn(name = "TYPEID", referencedColumnName = "TYPEID")}, uniqueConstraints = @UniqueConstraint(columnNames = {
             "BETSLIPID", "TYPEID" }))
 
-    Set<Type> types;
+    List<Type> types;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
     @JoinColumn(name = "USERID")
